@@ -983,8 +983,9 @@
     minimist "^1.2.0"
 
 "@data-story-org/core@data-story-org/core":
-  version "0.1.0"
-  resolved "https://codeload.github.com/data-story-org/core/tar.gz/03304e4fb0f6e67744c8f46fdf4b5570f5e44dc7"
+  version "0.0.3"
+  uid e562b44eeb7ceafd5d03edbe19c861ddd48753af
+  resolved "https://codeload.github.com/data-story-org/core/tar.gz/e562b44eeb7ceafd5d03edbe19c861ddd48753af"
   dependencies:
     axios "^0.21.1"
     laravel-mix "^6.0.25"
