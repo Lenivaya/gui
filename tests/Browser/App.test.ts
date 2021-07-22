@@ -25,16 +25,12 @@ describe('App', () => {
   };
 
   const addNode = async (nodeName: string, page) => {
-    await expect(page).toClick('span#add-node');
-    await sleep(1000);
+    await expect(page).toClick('#add-node');
     await expect(page).toFill(
-      'input#node-search',
+      '#node-search',
       nodeName,
     );
-    await sleep(1000);
     await expect(page).toClick(`#${nodeName}`);
-    await sleep(1000);
-    await expect(page).toMatch(nodeName);
   };
 
   it('Loads and renders react', async () => {
@@ -50,6 +46,7 @@ describe('App', () => {
 
     const node = 'CreateJSON';
     await addNode(node, page);
+    await expect(page).toMatch(node);
     browser.close();
   }, 16000);
 
