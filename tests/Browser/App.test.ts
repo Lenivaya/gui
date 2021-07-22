@@ -9,10 +9,11 @@ describe('App', () => {
   const setup = async () => {
     const browser = await puppeteer.launch({
       headless: true,
+      devtools: false,
     });
     const page = await browser.newPage();
 
-    await page.setViewport({ width: 500, height: 2400 });
+    await page.setViewport({ width: 1280, height: 768 });
 
     await page.goto(
       `file://${process.cwd()}/public/index.html`,
@@ -25,12 +26,15 @@ describe('App', () => {
   };
 
   const addNode = async (nodeName: string, page) => {
-    await expect(page).toClick('#add-node');
+    await expect(page).toClick('span#add-node');
+    await sleep(1000)
     await expect(page).toFill(
-      '#node-search',
+      'input#node-search',
       nodeName,
     );
+    await sleep(1000)
     await expect(page).toClick(`#${nodeName}`);
+    await sleep(1000)
   };
 
   it('Loads and renders react', async () => {
@@ -48,7 +52,7 @@ describe('App', () => {
     await addNode(node, page);
     await expect(page).toMatch(node);
     browser.close();
-  }, 16000);
+  });
 
   // it('Adds an Inspector node', async () => {
   //   const { page, browser } = await setup();
