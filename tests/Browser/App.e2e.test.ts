@@ -72,6 +72,10 @@ describe('App', () => {
   }, 100000);
 
   it('Shows inspector tab', async () => {
+    await expect(page).toClick('span#run');
+    await page.waitForSelector('div#inspector-icon', {
+      visible: true,
+    });
     await expect(page).toClick('div#inspector-icon');
 
     await sleep(100);
