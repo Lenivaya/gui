@@ -28,6 +28,7 @@ describe('App', async () => {
 
   const { page, browser } = await setup();
 
+
   it('Loads and renders react', async () => {
     await expect(page).toMatch('proof of concept');
   }, 20000);
