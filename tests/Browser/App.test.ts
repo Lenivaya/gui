@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer';
 import 'expect-puppeteer';
 import { setDefaultOptions } from 'expect-puppeteer';
 
-setDefaultOptions({ timeout: 1500 });
+setDefaultOptions({ timeout: 2000 });
 
 const sleep = (ms: number) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -60,5 +60,5 @@ describe('App', () => {
     await expect(page).toMatch(node1);
     await expect(page).toMatch(node2);
     browser.close();
-  }, 20000);
+  }, 90000);
 });
