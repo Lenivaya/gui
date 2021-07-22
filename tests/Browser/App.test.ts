@@ -37,7 +37,7 @@ describe('App', () => {
 
   const addNode = async (nodeName: string, page) => {
     await expect(page).toClick('span#add-node');
-    await page.focus('input#node-search')
+    await page.waitForSelector('input#node-search');
     await expect(page).toFill(
       'input#node-search',
       nodeName,
