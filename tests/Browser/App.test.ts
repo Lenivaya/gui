@@ -24,7 +24,7 @@ describe('App', () => {
         '--disable-dev-shm-usage',
         '--disable-web-security',
       ],
-    });
+    }, 20000);
     page = await browser.newPage();
 
     await page.setViewport({ width: 1366, height: 768 });
