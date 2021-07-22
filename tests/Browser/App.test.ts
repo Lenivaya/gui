@@ -50,7 +50,6 @@ describe('App', () => {
   it('Loads and renders react', async () => {
     await expect(page).toMatch('proof of concept');
     await expect(page).toMatch('DataStory');
-    browser.close();
   }, 20000);
 
   it('Adds a CreateJSON and an Inspect nodes', async () => {
@@ -62,8 +61,6 @@ describe('App', () => {
 
     await expect(page).toMatch(node1);
     // await expect(page).toMatch(node2);
-
-    browser.close();
   }, 100000);
 
   afterAll(() => browser.close());
