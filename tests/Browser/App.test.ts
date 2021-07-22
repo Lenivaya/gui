@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer';
 import 'expect-puppeteer';
 import { setDefaultOptions } from 'expect-puppeteer';
 
-setDefaultOptions({ timeout: 5000 });
+setDefaultOptions({ timeout: 10000 });
 
 const sleep = (ms: number) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -13,10 +13,17 @@ describe('App', () => {
     const browser = await puppeteer.launch({
       headless: true,
       devtools: false,
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-gpu',
+        '--disable-dev-shm-usage',
+        '--disable-web-security',
+      ],
     });
     const page = await browser.newPage();
 
-    await page.setViewport({ width: 1280, height: 768 });
+    // await page.setViewport({ width: 1280, height: 768 });
 
     await page.goto(
       `file://${process.cwd()}/public/index.html`,
