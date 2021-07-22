@@ -26,9 +26,10 @@ describe('App', () => {
     };
   };
 
-  const { page, browser } = setup();
-
   it('Loads and renders react', async () => {
+    const { page, browser } = await setup();
+
     await expect(page).toMatch('proof of concept');
+    browser.close();
   }, 20000);
 });
