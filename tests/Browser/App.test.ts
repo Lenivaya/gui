@@ -32,7 +32,6 @@ describe('App', () => {
       `file://${process.cwd()}/public/index.html`,
       { waitUntil: 'load', timeout: 0 },
     );
-    // await page.waitForNavigation();
   }, 50000);
 
   const addNode = async (nodeName: string, page) => {
