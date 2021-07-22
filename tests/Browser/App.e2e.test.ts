@@ -59,7 +59,7 @@ describe('App', () => {
 
     await expect(page).toMatch(node);
     await expect(page).toMatch(node2);
-  }, 100000);
+  }, 20000);
 
   it('Runs story and shows notification', async () => {
     await expect(page).toClick('span#run');
@@ -69,14 +69,15 @@ describe('App', () => {
 
     await sleep(100);
     await expect(page).toMatch('Successfully ran story!');
-  }, 100000);
+  }, 50000);
 
   it('Shows inspector tab', async () => {
     await expect(page).toClick('div#inspector-icon');
-    await expect(page).toClick('RESOURCE');
 
-    await expect(page).toClick('todos');
-  }, 100000);
+    await sleep(100);
+    await expect(page).toMatch('RESOURCE');
+    await expect(page).toMatch('todos');
+  }, 20000);
 
   afterAll(() => browser.close());
 });
