@@ -71,5 +71,12 @@ describe('App', () => {
     await expect(page).toMatch('Successfully ran story!');
   }, 100000);
 
+  it('Shows inspector tab', async () => {
+    await expect(page).toClick('@inspect');
+    await expect(page).toClick('RESOURCE');
+
+    await expect(page).toClick('todos');
+  }, 100000);
+
   afterAll(() => browser.close());
 });
