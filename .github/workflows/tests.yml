@@ -35,8 +35,8 @@ jobs:
       - name: Install dependencies
         run: yarn --silent
 
-      - name: Build in production environment
-        run: yarn run prod
+      # - name: Build in production environment
+      #   run: yarn run prod
 
       - name: Test
         run: yarn test
