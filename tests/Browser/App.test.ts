@@ -1,6 +1,10 @@
 import puppeteer from 'puppeteer';
 import 'expect-puppeteer';
 
+const sleep = (ms: number) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
 describe('App', () => {
   const setup = async () => {
     const browser = await puppeteer.launch({
@@ -33,6 +37,7 @@ describe('App', () => {
       nodeName,
     );
     await expect(page).toClick(`#${nodeName}`);
+    await sleep(1000);
   };
 
   it('Loads and renders react', async () => {
@@ -51,7 +56,6 @@ describe('App', () => {
     await expect(page).toMatch(node);
     browser.close();
   });
-
 
   it('Adds an Inspector node', async () => {
     const { page, browser } = await setup();
