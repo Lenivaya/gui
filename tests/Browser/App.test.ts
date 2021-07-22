@@ -45,6 +45,9 @@ describe('App', () => {
       nodeName,
     );
     await page.keyboard.press('Enter');
+    await page.waitForSelector('div#node', {
+      visible: true,
+    });
     // await expect(page).toClick(`li#${nodeName}`);
   };
 
@@ -58,7 +61,7 @@ describe('App', () => {
 
   it('Adds a CreateJSON and an Inspect nodes', async () => {
     const { page, browser } = await setup();
-    
+
     const node1 = 'CreateJSON';
     await addNode(node1, page);
 
