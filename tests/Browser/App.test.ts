@@ -34,6 +34,7 @@ describe('App', () => {
     );
     await page.waitForNavigation({
       waitUntil: 'networkidle0',
+      timeout: 0,
     });
     await page.setDefaultTimeout(0);
   }, 50000);
