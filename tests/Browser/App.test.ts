@@ -51,18 +51,18 @@ describe('App', () => {
   }, 20000);
 
   it('Creates nodes', async () => {
-    const node1 = 'CreateJSON';
-    await addNode(node1, page);
+    const node = 'CreateJSON';
+    await addNode(node, page);
 
     // const node2 = 'Inspect';
     // await addNode(node2, page);
 
-    const node3 = 'Comment'
-    await addNode(node3, page);
+    // const node3 = 'Comment'
+    // await addNode(node3, page);
 
-    await expect(page).toMatch(node1);
+    await expect(page).toMatch(node);
     // await expect(page).toMatch(node2);
-    await expect(page).toMatch(node3);
+    // await expect(page).toMatch(node3);
   }, 100000);
 
   afterAll(() => browser.close());
