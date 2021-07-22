@@ -37,7 +37,9 @@ describe('App', () => {
 
   const addNode = async (nodeName: string, page) => {
     await expect(page).toClick('span#add-node');
-    await page.waitForSelector('input#node-search');
+    await page.waitForSelector('input#node-search', {
+      visible: true,
+    });
     await expect(page).toFill(
       'input#node-search',
       nodeName,
@@ -56,7 +58,6 @@ describe('App', () => {
 
   it('Adds a CreateJSON and an Inspector nodes', async () => {
     const { page, browser } = await setup();
-
     const node1 = 'CreateJSON';
     await addNode(node1, page);
 
