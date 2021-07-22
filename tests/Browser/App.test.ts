@@ -16,13 +16,6 @@ describe('App', () => {
     browser = await puppeteer.launch({
       headless: true,
       devtools: false,
-      // args: [
-      //   '--no-sandbox',
-      //   '--disable-setuid-sandbox',
-      //   '--disable-gpu',
-      //   '--disable-dev-shm-usage',
-      //   '--disable-web-security',
-      // ],
     });
     page = await browser.newPage();
 
@@ -31,7 +24,6 @@ describe('App', () => {
     await page.goto(
       `file://${process.cwd()}/public/index.html`,
       { waitUntil: 'networkidle2'}
-        // , timeout: 0 },
     );
   }, 100000);
 
@@ -62,12 +54,12 @@ describe('App', () => {
     const node2 = 'Inspect';
     await addNode(node2, page);
 
-    // const node3 = 'Comment'
-    // await addNode(node3, page);
+    const node3 = 'Comment'
+    await addNode(node3, page);
 
     await expect(page).toMatch(node);
     await expect(page).toMatch(node2);
-    // await expect(page).toMatch(node3);
+    await expect(page).toMatch(node3);
   }, 100000);
 
   afterAll(() => browser.close());
