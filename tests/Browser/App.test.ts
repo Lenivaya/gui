@@ -65,7 +65,7 @@ describe('App', () => {
     const node2 = 'Inspect';
     await addNode(node2, page);
 
-    page.evaluate(async () => {
+    page.evaluate(() => {
       await expect(page).toMatch(node1);
       await expect(page).toMatch(node2);
     });
