@@ -37,7 +37,7 @@ describe('App', () => {
       timeout: 0,
     });
     await page.setDefaultTimeout(0);
-  }, 50000);
+  }, 100000);
 
   const addNode = async (nodeName: string, page) => {
     await expect(page).toClick('span#add-node');
