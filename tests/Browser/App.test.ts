@@ -1,6 +1,7 @@
 import puppeteer from 'puppeteer';
 import 'expect-puppeteer';
 import { setDefaultOptions } from 'expect-puppeteer';
+import { puppeteerConfig } from './puppeteerConfig';
 
 setDefaultOptions({ timeout: 10000 });
 
@@ -9,33 +10,19 @@ const sleep = (ms: number) => {
 };
 
 describe('App', () => {
-  const setup = async () => {
-    const browser = await puppeteer.launch({
-      product: 'firefox',
-      headless: true,
-      devtools: false,
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-gpu',
-        '--disable-dev-shm-usage',
-        '--disable-web-security',
-      ],
-    });
-    const page = await browser.newPage();
+  let browser;
+  let page;
+
+  beforeAll(async () => {
+    browser = await puppeteer.launch(puppeteerConfig);
+    page = await browser.newPage();
+
     await page.setViewport({ width: 1366, height: 768 });
-
-    // await page.setViewport({ width: 1280, height: 768 });
-
+    await page.setDefaultNavigationTimeout(0);
     await page.goto(
       `file://${process.cwd()}/public/index.html`,
     );
-
-    return {
-      page,
-      browser,
-    };
-  };
+  });
 
   const addNode = async (nodeName: string, page) => {
     await expect(page).toClick('span#add-node');
@@ -56,7 +43,7 @@ describe('App', () => {
     await expect(page).toMatch('proof of concept');
     await expect(page).toMatch('DataStory');
     browser.close();
-  });
+  }, 20000);
 
   it('Adds a CreateJSON and an Inspect nodes', async () => {
     const { page, browser } = await setup();
@@ -72,4 +59,6 @@ describe('App', () => {
 
     browser.close();
   }, 100000);
+
+  afterAll(() => browser.close());
 });
