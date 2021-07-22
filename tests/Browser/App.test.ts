@@ -41,7 +41,8 @@ describe('App', () => {
       'input#node-search',
       nodeName,
     );
-    await expect(page).toClick(`li#${nodeName}`);
+    await page.keyboard.press('Enter');
+    // await expect(page).toClick(`li#${nodeName}`);
   };
 
   it('Loads and renders react', async () => {
