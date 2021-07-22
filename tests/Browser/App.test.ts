@@ -30,8 +30,9 @@ describe('App', () => {
     await page.setUserAgent('UA-TEST');
     await page.goto(
       `file://${process.cwd()}/public/index.html`,
+      { waitUntil: 'load', timeout: 0 },
     );
-    await page.waitForNavigation();
+    // await page.waitForNavigation();
   }, 50000);
 
   const addNode = async (nodeName: string, page) => {
