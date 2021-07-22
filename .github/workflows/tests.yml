@@ -56,8 +56,8 @@ jobs:
         # env:
         #   PUPPETEER_PRODUCT: firefox
 
-      # - name: Build in production environment
-      #   run: yarn run prod
+      - name: Build in production environment
+        run: yarn run prod
 
       - name: Test
         run: yarn test:e2e
