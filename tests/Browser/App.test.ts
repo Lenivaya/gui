@@ -29,7 +29,14 @@ describe('App', () => {
   it('Loads and renders react', async () => {
     const { page, browser } = await setup();
 
-    await expect(page).toMatch('proof of concept');
+    await expect(page).toMatch('non-existent test omg haskell rust nix');
     browser.close();
-  }, 20000);
+  }, 16000);
+
+  // it('Adds a CreateJSON node', async () => {
+  //   const { page, browser } = await setup();
+
+  //   await expect(page).toMatch('proof of concept');
+  //   browser.close();
+  // }, 16000);
 });
