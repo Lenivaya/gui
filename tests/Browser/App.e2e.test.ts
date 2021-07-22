@@ -73,9 +73,8 @@ describe('App', () => {
 
   it('Shows inspector tab', async () => {
     await expect(page).toClick('div#inspector-icon');
-
-    // await expect(page).toMatch('RESOURCE');
-    // await expect(page).toMatch('todos');
+    await sleep(500);
+    await expect(page).toMatch('todos');
   }, 100000);
 
   afterAll(() => browser.close());
