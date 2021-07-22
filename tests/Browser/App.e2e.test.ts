@@ -72,7 +72,7 @@ describe('App', () => {
   }, 100000);
 
   it('Shows inspector tab', async () => {
-    await expect(page).toClick('@inspect');
+    await expect(page).toClick('i#inspector-icon');
     await expect(page).toClick('RESOURCE');
 
     await expect(page).toClick('todos');
