@@ -52,14 +52,14 @@ describe('App', () => {
     await addNode(node, page);
     await expect(page).toMatch(node);
     browser.close();
-  }, 20000);
+  }, 16000);
 
-  // it('Adds an Inspector node', async () => {
-  //   const { page, browser } = await setup();
+  it('Adds an Inspector node', async () => {
+    const { page, browser } = await setup();
 
-  //   const node = 'Inspector';
-  //   await addNode(node, page);
-  //   await expect(page).toMatch(node);
-  //   browser.close();
-  // });
+    const node = 'Inspector';
+    await addNode(node, page);
+    await expect(page).toMatch(node);
+    browser.close();
+  }, 16000);
 });
