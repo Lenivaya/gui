@@ -29,7 +29,7 @@ describe('App', () => {
   it('Loads and renders react', async () => {
     const { page, browser } = await setup();
 
-    await expect(page).toMatch('non-existent test omg haskell rust nix');
+    await expect(page).toMatch('proof of concept');
     browser.close();
   }, 16000);
 
