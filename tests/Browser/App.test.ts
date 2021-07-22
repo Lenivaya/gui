@@ -62,7 +62,7 @@ describe('App', () => {
     await addNode(node2, page);
 
     const nodesNames = await page.$$eval('.node', (els) =>
-      els.map((el) => el.textContext),
+      els.map((el) => el.textContent),
     );
 
     console.log(nodesNames);
