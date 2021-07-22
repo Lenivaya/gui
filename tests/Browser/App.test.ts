@@ -35,7 +35,10 @@ describe('App', () => {
     };
   };
 
-  const addNode = async (nodeName: string, page) => {
+  const addAndCheckNode = async (
+    nodeName: string,
+    page,
+  ) => {
     await expect(page).toClick('span#add-node');
     await page.waitForSelector('input#node-search', {
       visible: true,
@@ -45,6 +48,7 @@ describe('App', () => {
       nodeName,
     );
     await page.keyboard.press('Enter');
+    await expect(page).toMatch(node);
     // await expect(page).toClick(`li#${nodeName}`);
   };
 
@@ -60,13 +64,10 @@ describe('App', () => {
     const { page, browser } = await setup();
 
     const node1 = 'CreateJSON';
-    await addNode(node1, page);
+    await addAndCheckNode(node1, page);
 
-    const node2 = 'Inspector';
-    await addNode(node2, page);
-
-    await expect(page).toMatch(node1);
-    await expect(page).toMatch(node2);
+    const node2 = 'Inspect';
+    await addAndCheckNode(node2, page);
 
     browser.close();
   }, 90000);
