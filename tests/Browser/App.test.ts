@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer';
 import 'expect-puppeteer';
 import { setDefaultOptions } from 'expect-puppeteer';
 
-setDefaultOptions({ timeout: 20000 });
+setDefaultOptions({ timeout: 10000 });
 
 const sleep = (ms: number) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -45,9 +45,6 @@ describe('App', () => {
       nodeName,
     );
     await page.keyboard.press('Enter');
-    await page.waitForSelector('div#node', {
-      visible: true,
-    });
     // await expect(page).toClick(`li#${nodeName}`);
   };
 
@@ -68,9 +65,11 @@ describe('App', () => {
     const node2 = 'Inspect';
     await addNode(node2, page);
 
-    await expect(page).toMatch(node1);
-    await expect(page).toMatch(node2);
+    page.evaluate(async () => {
+      await expect(page).toMatch(node1);
+      await expect(page).toMatch(node2);
+    });
 
     browser.close();
-  }, 90000);
+  }, 100000);
 });
