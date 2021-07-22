@@ -24,7 +24,7 @@ describe('App', () => {
         '--disable-dev-shm-usage',
         '--disable-web-security',
       ],
-    }, 20000);
+    });
     page = await browser.newPage();
 
     await page.setViewport({ width: 1366, height: 768 });
@@ -32,7 +32,7 @@ describe('App', () => {
     await page.goto(
       `file://${process.cwd()}/public/index.html`,
     );
-  });
+  }, 20000);
 
   const addNode = async (nodeName: string, page) => {
     await expect(page).toClick('span#add-node');
