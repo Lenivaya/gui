@@ -34,7 +34,7 @@ describe('App', () => {
     );
     await page.waitForSelector(`#${nodeName}`);
     await expect(page).toClick(`#${nodeName}`);
-    await sleep(1500);
+    sleep(2000);
   };
 
   it('Loads and renders react', async () => {
@@ -52,7 +52,7 @@ describe('App', () => {
     await addNode(node, page);
     await expect(page).toMatch(node);
     browser.close();
-  }, 16000);
+  }, 20000);
 
   it('Adds an Inspector node', async () => {
     const { page, browser } = await setup();
@@ -61,5 +61,5 @@ describe('App', () => {
     await addNode(node, page);
     await expect(page).toMatch(node);
     browser.close();
-  }, 16000);
+  }, 20000);
 });
