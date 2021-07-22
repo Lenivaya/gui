@@ -30,7 +30,7 @@ describe('App', () => {
     await page.setUserAgent('UA-TEST');
     await page.goto(
       `file://${process.cwd()}/public/index.html`,
-      { waitUntil: 'domcontentloaded'}
+      { waitUntil: 'networkidle2'}
         // , timeout: 0 },
     );
     // await page.waitForNavigation({
