@@ -11,6 +11,7 @@ const sleep = (ms: number) => {
 describe('App', () => {
   const setup = async () => {
     const browser = await puppeteer.launch({
+      timeout: 60000,
       headless: true,
       devtools: false,
       args: [
