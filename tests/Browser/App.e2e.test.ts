@@ -16,7 +16,7 @@ describe('App', () => {
     browser = await puppeteer.launch({
       headless: true,
       devtools: false,
-      slowMo: 250,
+      // slowMo: 250,
     });
     page = await browser.newPage();
 
@@ -59,6 +59,16 @@ describe('App', () => {
 
     await expect(page).toMatch(node);
     await expect(page).toMatch(node2);
+  }, 100000);
+
+  it('Runs story and shows notification', async () => {
+    await expect(page).toClick('span#run');
+    await page.waitForSelector('.Toastify__toast-body', {
+      visible: true,
+    });
+
+    await sleep(100);
+    await expect(page).toMatch('Successfully ran story!');
   }, 100000);
 
   afterAll(() => browser.close());
