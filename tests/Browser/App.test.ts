@@ -27,9 +27,11 @@ describe('App', () => {
     page = await browser.newPage();
 
     await page.setViewport({ width: 1366, height: 768 });
+    await page.setUserAgent('UA-TEST');
     await page.goto(
       `file://${process.cwd()}/public/index.html`,
     );
+    await page.waitForNavigation();
   }, 50000);
 
   const addNode = async (nodeName: string, page) => {
