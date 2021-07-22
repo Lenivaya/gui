@@ -48,13 +48,13 @@ describe('App', () => {
   it('Adds a CreateJSON and an Inspector nodes', async () => {
     const { page, browser } = await setup();
 
-    const node = 'CreateJSON';
-    await addNode(node, page);
-    await expect(page).toMatch(node);
+    const node1 = 'CreateJSON';
+    await addNode(node1, page);
+    await expect(page).toMatch(node1);
 
-    const node = 'Inspector';
-    await addNode(node, page);
-    await expect(page).toMatch(node);
+    const node2 = 'Inspector';
+    await addNode(node2, page);
+    await expect(page).toMatch(node2);
 
     browser.close();
   }, 20000);
