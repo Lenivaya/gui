@@ -28,10 +28,13 @@ describe('App', () => {
 
     await page.setViewport({ width: 1366, height: 768 });
     await page.setUserAgent('UA-TEST');
-    page.goto(
+    await page.goto(
       `file://${process.cwd()}/public/index.html`,
-      { waitUntil: 'load', timeout: 0 },
+      { waitUntil: 'networkidle0', timeout: 0 },
     );
+    await page.waitForNavigation({
+      waitUntil: 'networkidle0',
+    });
     await page.setDefaultTimeout(0);
   }, 50000);
 
