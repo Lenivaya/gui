@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 import 'expect-puppeteer';
 
-describe('App', async () => {
+describe('App', () => {
   const setup = async () => {
     const browser = await puppeteer.launch({
       headless: true,
@@ -27,7 +27,6 @@ describe('App', async () => {
   };
 
   const { page, browser } = await setup();
-
 
   it('Loads and renders react', async () => {
     await expect(page).toMatch('proof of concept');
