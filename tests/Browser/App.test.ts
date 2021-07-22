@@ -59,8 +59,8 @@ describe('App', () => {
     const node1 = 'CreateJSON';
     await addNode(node1, page);
 
-    const node2 = 'Inspector';
-    await addNode(node2, page);
+    // const node2 = 'Inspector';
+    // await addNode(node2, page);
 
     const nodesNames = await page.$$eval('.node', (els) =>
       els.map((el) => el.textContent),
