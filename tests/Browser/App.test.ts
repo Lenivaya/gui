@@ -34,7 +34,7 @@ describe('App', () => {
     await sleep(1000);
     await expect(page).toClick(`#${nodeName}`);
     await sleep(1000);
-    await expect(page).toMatch(node);
+    await expect(page).toMatch(nodeName);
   };
 
   it('Loads and renders react', async () => {
