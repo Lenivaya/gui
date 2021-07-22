@@ -30,6 +30,7 @@ describe('App', () => {
     const { page, browser } = await setup();
 
     await expect(page).toMatch('proof of concept');
+    await expect(page.title()).toBe('DataStory');
     browser.close();
   }, 16000);
 
