@@ -1,7 +1,6 @@
 import puppeteer from 'puppeteer';
 import 'expect-puppeteer';
 import { setDefaultOptions } from 'expect-puppeteer';
-import { puppeteerConfig } from './puppeteerConfig';
 
 setDefaultOptions({ timeout: 10000 });
 
@@ -14,7 +13,18 @@ describe('App', () => {
   let page;
 
   beforeAll(async () => {
-    browser = await puppeteer.launch(...puppeteerConfig);
+    browser = await puppeteer.launch({
+      product: 'firefox',
+      headless: true,
+      devtools: false,
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-gpu',
+        '--disable-dev-shm-usage',
+        '--disable-web-security',
+      ],
+    });
     page = await browser.newPage();
 
     await page.setViewport({ width: 1366, height: 768 });
