@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer';
 import 'expect-puppeteer';
 import { setDefaultOptions } from 'expect-puppeteer';
 
-setDefaultOptions({ timeout: 30000 });
+setDefaultOptions({ timeout: 0 });
 
 // const sleep = (ms: number) => {
 //   return new Promise((resolve) => setTimeout(resolve, ms));
