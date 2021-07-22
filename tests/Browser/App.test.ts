@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer';
 import 'expect-puppeteer';
 import { setDefaultOptions } from 'expect-puppeteer';
 
-setDefaultOptions({ timeout: 2000 });
+setDefaultOptions({ timeout: 5000 });
 
 const sleep = (ms: number) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -30,13 +30,11 @@ describe('App', () => {
 
   const addNode = async (nodeName: string, page) => {
     await expect(page).toClick('span#add-node');
-    await page.waitForSelector('input#node-search');
     await expect(page).toFill(
       'input#node-search',
       nodeName,
     );
-    await page.waitForSelector(`#${nodeName}`);
-    await expect(page).toClick(`#${nodeName}`);
+    await expect(page).toClick(`li#${nodeName}`);
     sleep(2000);
   };
 
