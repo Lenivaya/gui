@@ -27,14 +27,14 @@ describe('App', () => {
 
   const addNode = async (nodeName: string, page) => {
     await expect(page).toClick('span#add-node');
-    await sleep(1000);
+    await sleep(1500);
     await expect(page).toFill(
       'input#node-search',
       nodeName,
     );
-    await sleep(1000);
+    await sleep(1500);
     await expect(page).toClick(`#${nodeName}`);
-    await sleep(1000);
+    await sleep(1500);
   };
 
   it('Loads and renders react', async () => {
