@@ -14,7 +14,9 @@ describe('App', () => {
   let page;
 
   beforeAll(async () => {
-    browser = await puppeteer.launch(puppeteerConfig);
+    browser = await puppeteer.launch({
+      ...puppeteerConfig,
+    });
     page = await browser.newPage();
 
     await page.setViewport({ width: 1366, height: 768 });
@@ -38,16 +40,12 @@ describe('App', () => {
   };
 
   it('Loads and renders react', async () => {
-    const { page, browser } = await setup();
-
     await expect(page).toMatch('proof of concept');
     await expect(page).toMatch('DataStory');
     browser.close();
   }, 20000);
 
   it('Adds a CreateJSON and an Inspect nodes', async () => {
-    const { page, browser } = await setup();
-
     const node1 = 'CreateJSON';
     await addNode(node1, page);
 
