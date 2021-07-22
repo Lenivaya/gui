@@ -27,14 +27,14 @@ describe('App', () => {
 
   const addNode = async (nodeName: string, page) => {
     await expect(page).toClick('span#add-node');
-    await sleep(1000)
+    await sleep(1000);
     await expect(page).toFill(
       'input#node-search',
       nodeName,
     );
-    await sleep(1000)
+    await sleep(1000);
     await expect(page).toClick(`#${nodeName}`);
-    await sleep(1000)
+    await sleep(1000);
   };
 
   it('Loads and renders react', async () => {
@@ -54,12 +54,12 @@ describe('App', () => {
     browser.close();
   });
 
-  // it('Adds an Inspector node', async () => {
-  //   const { page, browser } = await setup();
+  it('Adds an Inspector node', async () => {
+    const { page, browser } = await setup();
 
-  //   const node = 'Inspector';
-  //   await addNode(node, page);
-  //   await expect(page).toMatch(node);
-  //   browser.close();
-  // }, 16000);
+    const node = 'Inspector';
+    await addNode(node, page);
+    await expect(page).toMatch(node);
+    browser.close();
+  });
 });
