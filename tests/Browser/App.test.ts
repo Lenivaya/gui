@@ -1,5 +1,8 @@
 import puppeteer from 'puppeteer';
 import 'expect-puppeteer';
+import { setDefaultOptions } from 'expect-puppeteer';
+
+setDefaultOptions({ timeout: 1500 });
 
 const sleep = (ms: number) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -50,12 +53,12 @@ describe('App', () => {
 
     const node1 = 'CreateJSON';
     await addNode(node1, page);
-    await expect(page).toMatch(node1);
 
     const node2 = 'Inspector';
     await addNode(node2, page);
-    await expect(page).toMatch(node2);
 
+    await expect(page).toMatch(node1);
+    await expect(page).toMatch(node2);
     browser.close();
   }, 20000);
 });
