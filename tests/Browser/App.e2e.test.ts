@@ -16,6 +16,7 @@ describe('App', () => {
     browser = await puppeteer.launch({
       headless: true,
       devtools: false,
+      slowMo: 250,
     });
     page = await browser.newPage();
 
