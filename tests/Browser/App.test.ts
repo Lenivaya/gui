@@ -42,7 +42,7 @@ describe('App', () => {
       nodeName,
     );
     await page.keyboard.press('Enter');
-    await page.waitForSelector('div#node', {
+    await page.waitForSelector('div.node', {
       visible: true,
     });
     // await expect(page).toClick(`li#${nodeName}`);
