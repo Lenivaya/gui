@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer';
 import 'expect-puppeteer';
 import { setDefaultOptions } from 'expect-puppeteer';
 
-setDefaultOptions({ timeout: 10000 });
+setDefaultOptions({ timeout: 30000 });
 
 const sleep = (ms: number) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -54,14 +54,14 @@ describe('App', () => {
     const node1 = 'CreateJSON';
     await addNode(node1, page);
 
-    const node2 = 'Inspect';
-    await addNode(node2, page);
+    // const node2 = 'Inspect';
+    // await addNode(node2, page);
 
     const node3 = 'Comment'
     await addNode(node3, page);
 
     await expect(page).toMatch(node1);
-    await expect(page).toMatch(node2);
+    // await expect(page).toMatch(node2);
     await expect(page).toMatch(node3);
   }, 100000);
 
