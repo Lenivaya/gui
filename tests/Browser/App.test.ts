@@ -33,11 +33,7 @@ describe('App', () => {
       { waitUntil: 'networkidle2'}
         // , timeout: 0 },
     );
-    // await page.waitForNavigation({
-    //   waitUntil: 'domcontentloaded',
-    // });
-    // await page.setDefaultTimeout(0);
-  }, 200000);
+  }, 100000);
 
   const addNode = async (nodeName: string, page) => {
     await expect(page).toClick('span#add-node');
