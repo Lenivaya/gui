@@ -14,7 +14,6 @@ describe('App', () => {
 
   beforeAll(async () => {
     browser = await puppeteer.launch({
-      product: 'firefox',
       headless: true,
       devtools: false,
       args: [
@@ -28,11 +27,10 @@ describe('App', () => {
     page = await browser.newPage();
 
     await page.setViewport({ width: 1366, height: 768 });
-    await page.setDefaultNavigationTimeout(0);
     await page.goto(
       `file://${process.cwd()}/public/index.html`,
     );
-  }, 20000);
+  }, 50000);
 
   const addNode = async (nodeName: string, page) => {
     await expect(page).toClick('span#add-node');

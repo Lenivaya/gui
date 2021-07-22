@@ -34,8 +34,8 @@ jobs:
 
       - name: Install dependencies
         run: yarn --silent
-        env:
-          PUPPETEER_PRODUCT: firefox
+        # env:
+        #   PUPPETEER_PRODUCT: firefox
 
       # - name: Build in production environment
       #   run: yarn run prod
