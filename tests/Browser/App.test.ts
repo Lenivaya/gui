@@ -28,7 +28,7 @@ describe('App', () => {
 
     await page.setViewport({ width: 1366, height: 768 });
     await page.setUserAgent('UA-TEST');
-    await page.goto(
+    page.goto(
       `file://${process.cwd()}/public/index.html`,
       { waitUntil: 'load', timeout: 0 },
     );
