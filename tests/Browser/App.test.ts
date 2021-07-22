@@ -36,8 +36,8 @@ describe('App', () => {
       'input#node-search',
       nodeName,
     );
-    await expect(page).toClick(`#${nodeName}`);
     await sleep(1000);
+    await expect(page).toClick(`#${nodeName}`);
   };
 
   it('Loads and renders react', async () => {
