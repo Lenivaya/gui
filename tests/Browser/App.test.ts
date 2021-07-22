@@ -14,9 +14,7 @@ describe('App', () => {
   let page;
 
   beforeAll(async () => {
-    browser = await puppeteer.launch({
-      ...puppeteerConfig,
-    });
+    browser = await puppeteer.launch(...puppeteerConfig);
     page = await browser.newPage();
 
     await page.setViewport({ width: 1366, height: 768 });
