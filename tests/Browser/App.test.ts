@@ -16,13 +16,13 @@ describe('App', () => {
     browser = await puppeteer.launch({
       headless: true,
       devtools: false,
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-gpu',
-        '--disable-dev-shm-usage',
-        '--disable-web-security',
-      ],
+      // args: [
+      //   '--no-sandbox',
+      //   '--disable-setuid-sandbox',
+      //   '--disable-gpu',
+      //   '--disable-dev-shm-usage',
+      //   '--disable-web-security',
+      // ],
     });
     page = await browser.newPage();
 
@@ -30,14 +30,14 @@ describe('App', () => {
     await page.setUserAgent('UA-TEST');
     await page.goto(
       `file://${process.cwd()}/public/index.html`,
-      { waitUntil: 'domcontentloaded', timeout: 0 },
+      { waitUntil: 'domcontentloaded'}
+        // , timeout: 0 },
     );
-    await page.waitForNavigation({
-      waitUntil: 'domcontentloaded',
-      timeout: 0,
-    });
-    await page.setDefaultTimeout(0);
-  }, 100000);
+    // await page.waitForNavigation({
+    //   waitUntil: 'domcontentloaded',
+    // });
+    // await page.setDefaultTimeout(0);
+  }, 200000);
 
   const addNode = async (nodeName: string, page) => {
     await expect(page).toClick('span#add-node');
