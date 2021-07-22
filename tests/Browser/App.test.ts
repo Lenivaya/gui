@@ -22,6 +22,7 @@ describe('App', () => {
       ],
     });
     const page = await browser.newPage();
+    await page.setViewPort({ widht: 1366, height: 768 });
 
     // await page.setViewport({ width: 1280, height: 768 });
 
@@ -65,10 +66,8 @@ describe('App', () => {
     const node2 = 'Inspect';
     await addNode(node2, page);
 
-    page.evaluate(() => {
-      await expect(page).toMatch(node1);
-      await expect(page).toMatch(node2);
-    });
+    await expect(page).toMatch(node1);
+    await expect(page).toMatch(node2);
 
     browser.close();
   }, 100000);
