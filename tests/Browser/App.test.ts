@@ -26,6 +26,15 @@ describe('App', () => {
     };
   };
 
+  const addNode = async (nodeName: string, page) => {
+    await expect(page).toClick('span#add-node');
+    await expect(page).toFill(
+      'input#node-search',
+      nodeName,
+    );
+    await expect(page).toClick(`#${nodeName}`);
+  };
+
   it('Loads and renders react', async () => {
     const { page, browser } = await setup();
 
@@ -34,10 +43,12 @@ describe('App', () => {
     browser.close();
   });
 
-  // it('Adds a CreateJSON node', async () => {
-  //   const { page, browser } = await setup();
+  it('Adds a CreateJSON node', async () => {
+    const { page, browser } = await setup();
 
-  //   await expect(page).toMatch('proof of concept');
-  //   browser.close();
-  // }, 16000);
+    const node = 'CreateJSON';
+    await addNode(node, page);
+    await expect(page).toMatch(node);
+    browser.close();
+  });
 });
