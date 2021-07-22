@@ -28,10 +28,6 @@ describe('App', () => {
     );
 
     await sleep(5000);
-
-    // await page.waitForNavigation({
-    //   waitUntil: 'networkidle2',
-    // });
   }, 200000);
 
   const addNode = async (nodeName: string, page) => {
@@ -61,12 +57,8 @@ describe('App', () => {
     const node2 = 'Inspect';
     await addNode(node2, page);
 
-    const node3 = 'Comment';
-    await addNode(node3, page);
-
     await expect(page).toMatch(node);
     await expect(page).toMatch(node2);
-    await expect(page).toMatch(node3);
   }, 100000);
 
   afterAll(() => browser.close());
