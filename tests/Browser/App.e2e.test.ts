@@ -78,7 +78,6 @@ describe('App', () => {
     });
     await expect(page).toClick('div#inspector-icon');
 
-    await sleep(100);
     await expect(page).toMatch('RESOURCE');
     await expect(page).toMatch('todos');
   }, 100000);
