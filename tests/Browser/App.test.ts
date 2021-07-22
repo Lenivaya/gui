@@ -58,20 +58,16 @@ describe('App', () => {
 
   it('Adds a CreateJSON and an Inspector nodes', async () => {
     const { page, browser } = await setup();
+
     const node1 = 'CreateJSON';
     await addNode(node1, page);
 
-    // const node2 = 'Inspector';
-    // await addNode(node2, page);
+    const node2 = 'Inspector';
+    await addNode(node2, page);
 
-    const nodesNames = await page.$$eval('.node', (els) =>
-      els.map((el) => el.textContent),
-    );
+    await expect(page).toMatch(node1);
+    await expect(page).toMatch(node2);
 
-    console.log(nodesNames);
-
-    // await expect(page).toMatch(node1);
-    // await expect(page).toMatch(node2);
     browser.close();
   }, 90000);
 });
