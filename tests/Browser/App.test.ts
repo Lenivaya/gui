@@ -22,7 +22,7 @@ describe('App', () => {
       ],
     });
     const page = await browser.newPage();
-    await page.setViewPort({ widht: 1366, height: 768 });
+    await page.setViewport({ widht: 1366, height: 768 });
 
     // await page.setViewport({ width: 1280, height: 768 });
 
