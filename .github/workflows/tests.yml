@@ -19,7 +19,26 @@ on:
     tags-ignore: ['v[0-9]+.[0-9]+.[0-9]+*']
 
 jobs:
-  test:
+  unit_tests:
+    strategy:
+      matrix:
+        platform: [ubuntu-latest]
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn --silent
+
+      - name: Test
+        run: yarn test
+
+  e2e_tests:
     strategy:
       matrix:
         platform: [ubuntu-latest]
@@ -41,4 +60,4 @@ jobs:
       #   run: yarn run prod
 
       - name: Test
-        run: yarn test
+        run: yarn test:e2e

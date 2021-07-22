@@ -4,9 +4,9 @@ import { setDefaultOptions } from 'expect-puppeteer';
 
 setDefaultOptions({ timeout: 0 });
 
-// const sleep = (ms: number) => {
-//   return new Promise((resolve) => setTimeout(resolve, ms));
-// };
+const sleep = (ms: number) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
 
 describe('App', () => {
   let browser;
@@ -26,9 +26,11 @@ describe('App', () => {
       { waitUntil: 'networkidle2' },
     );
 
-    await page.waitForNavigation({
-      waitUntil: 'networkidle2',
-    });
+    await sleep(5000);
+
+    // await page.waitForNavigation({
+    //   waitUntil: 'networkidle2',
+    // });
   }, 200000);
 
   const addNode = async (nodeName: string, page) => {
