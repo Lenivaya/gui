@@ -32,6 +32,7 @@ describe('App', () => {
       `file://${process.cwd()}/public/index.html`,
       { waitUntil: 'load', timeout: 0 },
     );
+    await page.setDefaultTimeout(0);
   }, 50000);
 
   const addNode = async (nodeName: string, page) => {
@@ -47,7 +48,6 @@ describe('App', () => {
     await page.waitForSelector('div.node', {
       visible: true,
     });
-    // await expect(page).toClick(`li#${nodeName}`);
   };
 
   it('Loads and renders react', async () => {
