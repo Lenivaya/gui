@@ -12,13 +12,7 @@ describe('App', () => {
     });
     const page = await browser.newPage();
 
-    await page.emulate({
-      viewport: {
-        width: 500,
-        height: 2400,
-      },
-      userAgent: '',
-    });
+    await page.setViewport({ width: 500, height: 2400 });
 
     await page.goto(
       `file://${process.cwd()}/public/index.html`,
@@ -39,6 +33,8 @@ describe('App', () => {
     );
     await sleep(1000);
     await expect(page).toClick(`#${nodeName}`);
+    await sleep(1000);
+    await expect(page).toMatch(node);
   };
 
   it('Loads and renders react', async () => {
@@ -54,7 +50,6 @@ describe('App', () => {
 
     const node = 'CreateJSON';
     await addNode(node, page);
-    await expect(page).toMatch(node);
     browser.close();
   }, 16000);
 
