@@ -30,9 +30,9 @@ describe('App', () => {
     const { page, browser } = await setup();
 
     await expect(page).toMatch('proof of concept');
-    await expect(page.title()).toBe('DataStory');
+    await expect(page).toMatch('DataStory');
     browser.close();
-  }, 16000);
+  });
 
   // it('Adds a CreateJSON node', async () => {
   //   const { page, browser } = await setup();
