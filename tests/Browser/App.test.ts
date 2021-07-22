@@ -48,7 +48,7 @@ describe('App', () => {
       nodeName,
     );
     await page.keyboard.press('Enter');
-    await expect(page).toMatch(node);
+    await expect(page).toMatch(nodeName);
     // await expect(page).toClick(`li#${nodeName}`);
   };
 
