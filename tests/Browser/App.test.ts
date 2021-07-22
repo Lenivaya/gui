@@ -23,9 +23,13 @@ describe('App', () => {
     await page.setUserAgent('UA-TEST');
     await page.goto(
       `file://${process.cwd()}/public/index.html`,
-      { waitUntil: 'networkidle2'}
+      { waitUntil: 'networkidle2' },
     );
-  }, 100000);
+
+    await page.waitForNavigation({
+      waitUntil: 'networkidle2',
+    });
+  }, 200000);
 
   const addNode = async (nodeName: string, page) => {
     await expect(page).toClick('span#add-node');
@@ -54,7 +58,7 @@ describe('App', () => {
     const node2 = 'Inspect';
     await addNode(node2, page);
 
-    const node3 = 'Comment'
+    const node3 = 'Comment';
     await addNode(node3, page);
 
     await expect(page).toMatch(node);
