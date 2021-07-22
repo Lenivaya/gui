@@ -4,9 +4,9 @@ import { setDefaultOptions } from 'expect-puppeteer';
 
 setDefaultOptions({ timeout: 30000 });
 
-const sleep = (ms: number) => {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-};
+// const sleep = (ms: number) => {
+//   return new Promise((resolve) => setTimeout(resolve, ms));
+// };
 
 describe('App', () => {
   let browser;
@@ -54,20 +54,20 @@ describe('App', () => {
   it('Loads and renders react', async () => {
     await expect(page).toMatch('proof of concept');
     await expect(page).toMatch('DataStory');
-  }, 20000);
+  });
 
   it('Creates nodes', async () => {
     const node = 'CreateJSON';
     await addNode(node, page);
 
-    // const node2 = 'Inspect';
-    // await addNode(node2, page);
+    const node2 = 'Inspect';
+    await addNode(node2, page);
 
     // const node3 = 'Comment'
     // await addNode(node3, page);
 
     await expect(page).toMatch(node);
-    // await expect(page).toMatch(node2);
+    await expect(page).toMatch(node2);
     // await expect(page).toMatch(node3);
   }, 100000);
 
