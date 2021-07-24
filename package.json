@@ -37,7 +37,7 @@
     "prod": "npm run production",
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --config=node_modules/laravel-mix/setup/webpack.config.js",
     "test": "jest --testPathIgnorePatterns=.*e2e.test.*",
-    "test:e2e": "jest --passWithNoTests --detectOpenHandles --runInBand -c jest.e2e.config.js"
+    "test:e2e": "jest --passWithNoTests --detectOpenHandles --maxWorkers=2 -c jest.e2e.config.js"
   },
   "dependencies": {
     "@data-story-org/core": "data-story-org/core#master",
@@ -75,7 +75,7 @@
     "sass": "^1.15.2",
     "sass-loader": "^8.0.0",
     "tailwindcss": "^2.2.4",
-    "ts-loader": "^8.0.17",
+    "ts-loader": "^9.2.4",
     "typescript": "^4.2.2"
   },
   "devDependencies": {
