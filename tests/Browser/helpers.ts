@@ -21,8 +21,8 @@ export const puppeteerConfig = {
 };
 
 export const browserSetup = async (browser, page) => {
-  browser = await puppeteer.launch(puppeteerConfig);
-  page = await browser.newPage();
+  browser = puppeteer.launch(puppeteerConfig);
+  page = browser.newPage();
 
   await page.setViewport({ width: 1366, height: 768 });
   await page.setUserAgent('UA-TEST');
