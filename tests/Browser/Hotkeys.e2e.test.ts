@@ -8,7 +8,9 @@ describe('Hotkeys', () => {
   let browser;
   let page;
 
-  beforeAll(await browserSetup(browser, page), 200000);
+  beforeAll(async () => {
+    await browserSetup(browser, page);
+  }, 200000);
 
   test('[ENTER] selects node from search', async () => {
     const node = 'CreateJSON';

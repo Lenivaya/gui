@@ -8,7 +8,9 @@ describe('App', () => {
   let browser;
   let page;
 
-  beforeAll(await browserSetup(browser, page), 200000);
+  beforeAll(async () => {
+    await browserSetup(browser, page);
+  }, 200000);
 
   it('Loads and renders react', async () => {
     await expect(page).toMatch('proof of concept');
