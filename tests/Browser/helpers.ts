@@ -20,7 +20,7 @@ export const puppeteerConfig = {
   ],
 };
 
-export const browserSetup = (browser, page) => async () => {
+export const browserSetup = async (browser, page) => {
   browser = await puppeteer.launch(puppeteerConfig);
   page = await browser.newPage();
 
