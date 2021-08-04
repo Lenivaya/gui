@@ -85,9 +85,13 @@ describe('Hotkeys', () => {
     await addNode(node, page);
     await expect(page).toMatch(node);
 
+    await sleep(1000)
+    await page.keyboard.press('Enter');
+    await page.waitForSelector('div#node-modal', {
+      visible: true,
+    });
     await expect(page).toMatch('node_name');
-    await expect(page).toMatch('features');
-  }, 50000);
+  }, 100000);
 
   afterAll(() => browser.close());
 });
