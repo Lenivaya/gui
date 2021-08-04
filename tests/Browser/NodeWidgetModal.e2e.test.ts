@@ -89,7 +89,10 @@ describe('Node modal', () => {
     }, 100000);
 
     test('Repeatables are being respected', async () => {
-      page.reload({ waitUntil: 'networkidle2' });
+      page.reload({
+        waitUntil: 'networkidle2',
+        timeout: 0,
+      });
       await addNode('CreateJSON', page);
       await addNode('CreateAttribute', page);
 
