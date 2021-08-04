@@ -51,6 +51,15 @@ describe('Fields | Persisting', () => {
 });
 
 describe('Fields | Repeatables', () => {
+  let browser;
+  let page;
+
+  beforeAll(async () => {
+    browser = await puppeteer.launch(puppeteerConfig);
+    page = await browser.newPage();
+    await pageSetup(page);
+  }, 50000);
+
   const repeatableRowSelector = '.flex.flex-row.space-x-1';
 
   const repeatablesLength = async (el) => {
