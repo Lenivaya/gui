@@ -16,7 +16,7 @@ describe('Fields | Persisting', () => {
   let page;
 
   beforeAll(async () => {
-    await browserSetup(browser, page), 200000;
+    browserSetup(browser, page)
 
     const possibleNodesNames = [
       'CreateJSON',

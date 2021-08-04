@@ -9,7 +9,8 @@ describe('App', () => {
   let page;
 
   beforeAll(async () => {
-    await browserSetup(browser, page);
+    browserSetup(browser, page);
+    await sleep(5000);
   }, 200000);
 
   it('Loads and renders react', async () => {
