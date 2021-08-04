@@ -37,6 +37,12 @@ describe('Node modal', () => {
 
       const newName = 'json creator';
 
+      await page.waitForSelector(
+        'input[value="CreateJSON"]',
+        {
+          visible: true,
+        },
+      );
       await page.focus('input[value="CreateJSON"]');
       await page.keyboard.type(newName);
       await page.keyboard.press('Escape');
@@ -53,6 +59,12 @@ describe('Node modal', () => {
 
     const newName = 'json creator';
 
+    await page.waitForSelector(
+      'input[value="CreateJSON"]',
+      {
+        visible: true,
+      },
+    );
     await page.focus('input[value="CreateJSON"]');
     await page.keyboard.type(newName);
     await page.keyboard.press('Enter');
