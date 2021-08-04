@@ -30,18 +30,6 @@ describe('Hotkeys', () => {
     await expect(page).toMatch(node);
   }, 50000);
 
-  test('[ENTER] opens node modal', async () => {
-    const node = 'CreateJSON';
-    await addNode(node, page);
-    await expect(page).toMatch(node);
-
-    await page.keyboard.press('Enter');
-    await page.waitForSelector('div#node-modal', {
-      visible: true,
-    });
-    await expect(page).toMatch('div#node-modal');
-  }, 50000);
-
   test('[SHIFT + T] opens inspector', async () => {
     await page.keyboard.down('Shift');
     await page.keyboard.press('KeyT');
@@ -90,11 +78,16 @@ describe('Hotkeys', () => {
     await page.keyboard.press('KeyD');
     await page.keyboard.up('Shift');
     await expect(page).not.toMatch('No data to show here');
-
-    // await expect(page).toMatch(
-    //   'span#story-workbench.text-malibu-600',
-    // );
   }, 200000);
+
+  test('[ENTER] opens node modal', async () => {
+    const node = 'CreateJSON';
+    await addNode(node, page);
+    await expect(page).toMatch(node);
+
+    await expect(page).toMatch('node_name');
+    await expect(page).toMatch('features');
+  }, 50000);
 
   afterAll(() => browser.close());
 });
