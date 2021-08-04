@@ -64,6 +64,13 @@ describe('Node modal', () => {
     const repeatableRowSelector =
       '.flex.flex-row.space-x-1';
 
+    const repeatablesLength = async (el) => {
+      const repeatables = await el.$$(
+        repeatableRowSelector,
+      );
+      return repeatables.length;
+    };
+
     test('Repeatables can be added and removed', async () => {
       const node = 'CreateAttribute';
       await addNode(node, page);
@@ -72,23 +79,65 @@ describe('Node modal', () => {
       const modal = await expect(page).toMatchElement(
         '#node-modal',
       );
-      // await page.waitForSelector('#node-modal', {
-      //   visible: true,
-      // });
-
-      let repeatables = await page.$$(
-        repeatableRowSelector,
-      );
-      expect(repeatables.length).toBe(1);
+      expect(await repeatablesLength(modal)).toBe(1);
 
       await expect(modal).toClick('span', { text: '+' });
-      repeatables = await page.$$(repeatableRowSelector);
-      expect(repeatables.length).toBe(2);
+      expect(await repeatablesLength(modal)).toBe(2);
 
       await expect(modal).toClick('span', { text: '-' });
-      repeatables = await page.$$(repeatableRowSelector);
-      expect(repeatables.length).toBe(1);
+      expect(await repeatablesLength(modal)).toBe(1);
     }, 100000);
+
+    test('Repeatables are being respected', async () => {
+      await addNode('CreateJSON', page);
+      await addNode('CreateAttribute', page);
+
+      await page.keyboard.press('Enter');
+      const modal = await expect(page).toMatchElement(
+        '#node-modal',
+      );
+
+      const randomValue1 = generateRandomString();
+      const randomValue2 = generateRandomString();
+
+      await expect(modal).toFill(
+        'input[value="Attribute"]',
+        'random1',
+      );
+      await expect(modal).toFill(
+        'input[value="Value"]',
+        randomValue1,
+      );
+
+      await expect(modal).toClick('span', { text: '+' });
+
+      await expect(modal).toFill(
+        'input[value="Attribute"]',
+        'random2',
+      );
+      await expect(modal).toFill(
+        'input[value="Value"]',
+        randomValue2,
+      );
+
+      expect(await repeatablesLength(modal)).toBe(2);
+      await page.keyboard.press('Enter');
+
+      await addNode('Inspect', page);
+      await expect(page).toClick('span#run');
+      await page.waitForSelector('.Toastify__toast-body', {
+        visible: true,
+      });
+      await sleep(100);
+      await expect(page).toMatch('Successfully ran story!');
+
+      await expect(page).toClick('div#inspector-icon');
+      await sleep(500);
+      await expect(page).toMatch('random1');
+      await expect(page).toMatch('random2');
+      await expect(page).toMatch(randomValue1);
+      await expect(page).toMatch(randomValue2);
+    }, 200000);
   });
 
   afterAll(() => browser.close());
