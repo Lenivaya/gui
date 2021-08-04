@@ -44,4 +44,6 @@ describe('Node modal', () => {
       await expect(page).toMatch(newName);
     }, 50000);
   });
+
+  afterAll(() => browser.close());
 });
