@@ -37,8 +37,13 @@ describe('Node modal', () => {
 
       const newName = 'json creator';
 
-      await page.focus('#field-node_name > input');
-      await page.keyboard.type(newName);
+      // await page.focus('#field-node_name > input');
+      // await page.keyboard.type(newName);
+      const input = await expect(page).toMatchElement(
+        'input',
+        { text: 'CreateJSON' },
+      );
+      await expect(page).toFill(input, newName);
       await page.keyboard.press('Escape');
 
       await expect(page).toMatch(newName);
