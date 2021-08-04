@@ -50,12 +50,6 @@ describe('Node modal', () => {
     }, 50000);
 
     test('Fields is being automatically persisted', async () => {
-      await page.waitForSelector(
-        `input[value="${nodeName}"]`,
-        {
-          visible: true,
-        },
-      );
       await page.focus(`input[value="${nodeName}"]`);
 
       const newName = generateRandomString();
@@ -66,7 +60,36 @@ describe('Node modal', () => {
     }, 100000);
   });
 
-  // describe('Fields | Repeatables', () => {});
+  describe('Fields | Repeatables', () => {
+    const repeatableRowSelector =
+      '.flex.flex-row.space-x-1';
+
+    test('Repeatables can be added and removed', () => {
+      const node = 'CreateAttribute';
+      await addNode(node, page);
+
+      await page.keyboard.press('Enter');
+      const modal = await expect(page).toMatchElement(
+        '#node-modal',
+      );
+      // await page.waitForSelector('#node-modal', {
+      //   visible: true,
+      // });
+
+      let repeatables = await page.$$(
+        repeatableRowSelector,
+      );
+      expect(repeatables.length).toBe(1);
+
+      await expect(modal).toClick('span', { text: '+' });
+      repeatables = await page.$$(repeatableRowSelector);
+      expect(repeatables.length).toBe(2);
+
+      await expect(modal).toClick('span', { text: '-' });
+      repeatables = await page.$$(repeatableRowSelector);
+      expect(repeatables.length).toBe(1);
+    });
+  }, 100000);
 
   afterAll(() => browser.close());
 });
