@@ -10,6 +10,7 @@ export const puppeteerConfig = {
     '--disable-setuid-sandbox',
     '--disable-gpu',
     '--disable-dev-shm-usage',
+    '--allow-running-insecure-content',
     '--disable-web-security',
     '--no-first-run',
     '--no-zygote',
