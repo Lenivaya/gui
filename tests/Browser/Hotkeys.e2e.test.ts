@@ -30,6 +30,16 @@ describe('Hotkeys', () => {
     await expect(page).toMatch(node);
   }, 50000);
 
+  test('[ENTER] opens node modal', async () => {
+    const node = 'CreateJSON';
+    await addNode(node, page);
+    await expect(page).toMatch(node);
+
+    await sleep(1000);
+    await page.keyboard.press('Enter');
+    await expect(page).toMatch('#node-modal');
+  }, 50000);
+
   test('[SHIFT + T] opens inspector', async () => {
     await page.keyboard.down('Shift');
     await page.keyboard.press('KeyT');
