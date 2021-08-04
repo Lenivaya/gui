@@ -30,3 +30,7 @@ export const addNode = async (nodeName: string, page) => {
     visible: true,
   });
 };
+
+export const generateRandomString = () => {
+  return Math.random().toString(36).substring(7);
+};

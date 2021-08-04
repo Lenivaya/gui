@@ -1,7 +1,13 @@
 import puppeteer from 'puppeteer';
 import 'expect-puppeteer';
 import { setDefaultOptions } from 'expect-puppeteer';
-import { puppeteerConfig, sleep, addNode } from './helpers';
+import {
+  puppeteerConfig,
+  sleep,
+  addNode,
+  generateRandomString,
+} from './helpers';
+import { sample } from 'lodash';
 
 setDefaultOptions({ timeout: 0 });
 
@@ -25,25 +31,28 @@ describe('Node modal', () => {
 
   describe('Fields | Persisting', () => {
     beforeAll(async () => {
-      const node = 'CreateJSON';
-      await addNode(node, page);
-    }, 50000);
+      const possibleNodesNames = [
+        'CreateJSON',
+        'HTTPRequest',
+        'Inspect',
+      ];
 
-    test('Fields is being automatically persisted', async () => {
+      const node = sample(possibleNodesNames);
+      await addNode(node, page);
+
       await page.keyboard.press('Enter');
       await page.waitForSelector('div#node-modal', {
         visible: true,
       });
 
-      const newName = 'json creator';
+      await page.waitForSelector(`input[value="${node}"]`, {
+        visible: true,
+      });
+      await page.focus(`input[value="${node}"]`);
+    }, 50000);
 
-      await page.waitForSelector(
-        'input[value="CreateJSON"]',
-        {
-          visible: true,
-        },
-      );
-      await page.focus('input[value="CreateJSON"]');
+    test('Fields is being automatically persisted', async () => {
+      const newName = generateRandomString();
       await page.keyboard.type(newName);
       await page.keyboard.press('Escape');
 
@@ -51,32 +60,15 @@ describe('Node modal', () => {
     }, 100000);
 
     test('Fields is being persisted by Enter submission', async () => {
-      await page.keyboard.press('Enter');
-      await page.waitForSelector('div#node-modal', {
-        visible: true,
-      });
-
-      const newName = 'json creator';
-
-      await page.waitForSelector(
-        'input[value="CreateJSON"]',
-        {
-          visible: true,
-        },
-      );
-      await page.focus('input[value="CreateJSON"]');
+      const newName = generateRandomString();
       await page.keyboard.type(newName);
       await page.keyboard.press('Enter');
 
       await expect(page).toMatch(newName);
     }, 100000);
-
-    afterAll(() =>
-      page.reload({
-        waitUntil: 'networkidle2',
-      }),
-    );
   });
+
+  // describe('Fields | Repeatables', () => {});
 
   afterAll(() => browser.close());
 });
