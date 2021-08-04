@@ -35,9 +35,11 @@ describe('Hotkeys', () => {
     await addNode(node, page);
     await expect(page).toMatch(node);
 
-    await sleep(1000);
     await page.keyboard.press('Enter');
-    await expect(page).toMatch('#node-modal');
+    await page.waitForSelector('div#node-modal', {
+      visible: true,
+    });
+    await expect(page).toMatch('div#node-modal');
   }, 50000);
 
   test('[SHIFT + T] opens inspector', async () => {
