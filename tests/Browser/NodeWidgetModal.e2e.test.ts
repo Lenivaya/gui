@@ -24,10 +24,12 @@ describe('Node modal', () => {
   }, 200000);
 
   describe('Fields | Persisting', () => {
-    test('Fields is being automatically persisted', async () => {
+    beforeAll(async () => {
       const node = 'CreateJSON';
       await addNode(node, page);
+    }, 50000);
 
+    test('Fields is being automatically persisted', async () => {
       await page.keyboard.press('Enter');
       await page.waitForSelector('div#node-modal', {
         visible: true,
@@ -47,31 +49,34 @@ describe('Node modal', () => {
 
       await expect(page).toMatch(newName);
     }, 100000);
-  });
 
-  test('Fields is being persisted by Enter submission', async () => {
-    const node = 'HTTPRequest';
-    await addNode(node, page);
-
-    await page.keyboard.press('Enter');
-    await page.waitForSelector('div#node-modal', {
-      visible: true,
-    });
-
-    const newName = 'request over http';
-
-    await page.waitForSelector(
-      'input[value="HTTPRequest"]',
-      {
+    test('Fields is being persisted by Enter submission', async () => {
+      await page.keyboard.press('Enter');
+      await page.waitForSelector('div#node-modal', {
         visible: true,
-      },
-    );
-    await page.focus('input[value="HTTPRequest"]');
-    await page.keyboard.type(newName);
-    await page.keyboard.press('Enter');
+      });
 
-    await expect(page).toMatch(newName);
-  }, 100000);
+      const newName = 'json creator';
+
+      await page.waitForSelector(
+        'input[value="CreateJSON"]',
+        {
+          visible: true,
+        },
+      );
+      await page.focus('input[value="CreateJSON"]');
+      await page.keyboard.type(newName);
+      await page.keyboard.press('Enter');
+
+      await expect(page).toMatch(newName);
+    }, 100000);
+
+    afterAll(() =>
+      page.reload({
+        waitUntil: 'networkidle2',
+      }),
+    );
+  });
 
   afterAll(() => browser.close());
 });
