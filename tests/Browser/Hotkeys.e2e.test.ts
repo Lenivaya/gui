@@ -1,7 +1,6 @@
-import puppeteer from 'puppeteer';
 import 'expect-puppeteer';
 import { setDefaultOptions } from 'expect-puppeteer';
-import { puppeteerConfig, sleep, addNode } from './helpers';
+import { browserSetup, sleep, addNode } from './helpers';
 
 setDefaultOptions({ timeout: 0 });
 
@@ -9,19 +8,7 @@ describe('Hotkeys', () => {
   let browser;
   let page;
 
-  beforeAll(async () => {
-    browser = await puppeteer.launch(puppeteerConfig);
-    page = await browser.newPage();
-
-    await page.setViewport({ width: 1366, height: 768 });
-    await page.setUserAgent('UA-TEST');
-    await page.goto(
-      `file://${process.cwd()}/public/index.html`,
-      { waitUntil: 'networkidle2' },
-    );
-
-    await sleep(5000);
-  }, 200000);
+  beforeAll(browserSetup(browser, page), 200000);
 
   test('[ENTER] selects node from search', async () => {
     const node = 'CreateJSON';
@@ -85,7 +72,7 @@ describe('Hotkeys', () => {
     await addNode(node, page);
     await expect(page).toMatch(node);
 
-    await sleep(1000)
+    await sleep(1000);
     await page.keyboard.press('Enter');
     await page.waitForSelector('div#node-modal', {
       visible: true,

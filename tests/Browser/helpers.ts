@@ -1,3 +1,4 @@
+import puppeteer from 'puppeteer';
 import 'expect-puppeteer';
 
 export const puppeteerConfig = {
@@ -17,6 +18,20 @@ export const puppeteerConfig = {
     '--no-zygote',
     '--single-process',
   ],
+};
+
+export const browserSetup = async (browser, page) => () => {
+  browser = await puppeteer.launch(puppeteerConfig);
+  page = await browser.newPage();
+
+  await page.setViewport({ width: 1366, height: 768 });
+  await page.setUserAgent('UA-TEST');
+  await page.goto(
+    `file://${process.cwd()}/public/index.html`,
+    { waitUntil: 'networkidle2' },
+  );
+
+  await sleep(5000);
 };
 
 export const sleep = (ms: number) => {
