@@ -30,14 +30,17 @@ describe('Node modal', () => {
   }, 200000);
 
   describe('Fields | Persisting', () => {
-    beforeAll(async () => {
-      const possibleNodesNames = [
-        'CreateJSON',
-        'HTTPRequest',
-        'Inspect',
-      ];
+    let possibleNodesNames = [
+      'CreateJSON',
+      'HTTPRequest',
+      'Inspect',
+    ];
 
+    beforeAll(async () => {
       const node = sample(possibleNodesNames);
+      possibleNodesNames = possibleNodesNames.filter(
+        (n) => n !== node,
+      );
       await addNode(node, page);
 
       await page.keyboard.press('Enter');
