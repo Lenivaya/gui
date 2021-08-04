@@ -140,5 +140,8 @@ describe('Node modal', () => {
     }, 200000);
   });
 
+  afterEach(() => {
+    page.reload({ waitUntil: 'networkidle2' });
+  }, 20000);
   afterAll(() => browser.close());
 });
