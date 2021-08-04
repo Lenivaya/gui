@@ -24,12 +24,10 @@ describe('Node modal', () => {
   }, 200000);
 
   describe('Fields | Persisting', () => {
-    beforeAll(async () => {
+    test('Fields is being automatically persisted', async () => {
       const node = 'CreateJSON';
       await addNode(node, page);
-    }, 50000);
 
-    test('Fields is being automatically persisted', async () => {
       await page.keyboard.press('Enter');
       await page.waitForSelector('div#node-modal', {
         visible: true,
@@ -52,20 +50,23 @@ describe('Node modal', () => {
   });
 
   test('Fields is being persisted by Enter submission', async () => {
+    const node = 'HTTPRequest';
+    await addNode(node, page);
+
     await page.keyboard.press('Enter');
     await page.waitForSelector('div#node-modal', {
       visible: true,
     });
 
-    const newName = 'json creator';
+    const newName = 'request over http';
 
     await page.waitForSelector(
-      'input[value="CreateJSON"]',
+      'input[value="HTTPRequest"]',
       {
         visible: true,
       },
     );
-    await page.focus('input[value="CreateJSON"]');
+    await page.focus('input[value="HTTPRequest"]');
     await page.keyboard.type(newName);
     await page.keyboard.press('Enter');
 
