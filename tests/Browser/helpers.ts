@@ -9,6 +9,7 @@ export const puppeteerConfig = {
     '--no-sandbox',
     '--disable-setuid-sandbox',
     '--disable-gpu',
+    '--disable-software-rasterizer',
     '--disable-dev-shm-usage',
     '--allow-running-insecure-content',
     '--disable-web-security',
