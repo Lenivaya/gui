@@ -37,20 +37,20 @@ describe('Node modal', () => {
 
       const newName = 'json creator';
 
-      // await page.focus('#field-node_name > input');
-      // await page.keyboard.type(newName);
+      await page.focus('input[value="CreateJSON"]');
+      await page.keyboard.type(newName);
       // const input = await expect(page).toMatchElement(
       //   'input',
       //   { text: 'CreateJSON' },
       // );
-      await expect(page).toFill(
-        'input[value="CreateJSON"]',
-        newName,
-      );
+      // await expect(page).toFill(
+      //   'input[value="CreateJSON"]',
+      //   newName,
+      // );
       await page.keyboard.press('Escape');
 
       await expect(page).toMatch(newName);
-    }, 50000);
+    }, 100000);
   });
 
   afterAll(() => browser.close());
