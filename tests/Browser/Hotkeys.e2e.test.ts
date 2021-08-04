@@ -1,6 +1,12 @@
+import puppeteer from 'puppeteer';
 import 'expect-puppeteer';
 import { setDefaultOptions } from 'expect-puppeteer';
-import { browserSetup, sleep, addNode } from './helpers';
+import {
+  puppeteerConfig,
+  pageSetup,
+  sleep,
+  addNode,
+} from './helpers';
 
 setDefaultOptions({ timeout: 0 });
 
@@ -9,7 +15,10 @@ describe('Hotkeys', () => {
   let page;
 
   beforeAll(async () => {
-    browserSetup(browser, page);
+    browser = await puppeteer.launch(puppeteerConfig);
+    page = await browser.newPage();
+    await pageSetup(page);
+
     await sleep(5000);
   }, 200000);
 

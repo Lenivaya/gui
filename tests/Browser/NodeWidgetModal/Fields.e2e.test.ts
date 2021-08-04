@@ -1,7 +1,9 @@
+import puppeteer from 'puppeteer';
 import 'expect-puppeteer';
 import { setDefaultOptions } from 'expect-puppeteer';
 import {
-  browserSetup,
+  puppeteerConfig,
+  pageSetup,
   sleep,
   addNode,
   generateRandomString,
@@ -16,8 +18,12 @@ describe('Fields | Persisting', () => {
   let page;
 
   beforeAll(async () => {
-    browserSetup(browser, page)
+    browser = await puppeteer.launch(puppeteerConfig);
+    page = await browser.newPage();
+    await pageSetup(page);
+  }, 50000);
 
+  test('Fields is being automatically persisted', async () => {
     const possibleNodesNames = [
       'CreateJSON',
       'HTTPRequest',
@@ -32,11 +38,8 @@ describe('Fields | Persisting', () => {
     await page.waitForSelector('#node-modal', {
       visible: true,
     });
-  }, 50000);
 
-  test('Fields is being automatically persisted', async () => {
     await page.focus(`input[value="${nodeName}"]`);
-
     const newName = generateRandomString();
     await page.keyboard.type(newName);
     await page.keyboard.press('Escape');

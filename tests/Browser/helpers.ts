@@ -1,4 +1,3 @@
-import puppeteer from 'puppeteer';
 import 'expect-puppeteer';
 
 export const puppeteerConfig = {
@@ -20,15 +19,13 @@ export const puppeteerConfig = {
   ],
 };
 
-export const browserSetup = (browser, page) => {
-  browser = puppeteer.launch(puppeteerConfig);
-  page = browser.newPage();
-
-  page.setViewport({ width: 1366, height: 768 });
-  page.setUserAgent('UA-TEST');
-  page.goto(`file://${process.cwd()}/public/index.html`, {
-    waitUntil: 'networkidle2',
-  });
+export const pageSetup = async (page) => {
+  await page.setViewport({ width: 1366, height: 768 });
+  await page.setUserAgent('UA-TEST');
+  await page.goto(
+    `file://${process.cwd()}/public/index.html`,
+    { waitUntil: 'networkidle2' },
+  );
 };
 
 export const sleep = (ms: number) => {
