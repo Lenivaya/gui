@@ -39,11 +39,14 @@ describe('Node modal', () => {
 
       // await page.focus('#field-node_name > input');
       // await page.keyboard.type(newName);
-      const input = await expect(page).toMatchElement(
-        'input',
-        { text: 'CreateJSON' },
+      // const input = await expect(page).toMatchElement(
+      //   'input',
+      //   { text: 'CreateJSON' },
+      // );
+      await expect(page).toFill(
+        'input[value="CreateJSON"]',
+        newName,
       );
-      await expect(page).toFill(input, newName);
       await page.keyboard.press('Escape');
 
       await expect(page).toMatch(newName);
