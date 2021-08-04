@@ -57,6 +57,7 @@ describe('Node modal', () => {
       await page.keyboard.press('Escape');
 
       await expect(page).toMatch(newName);
+      await page.keyboard.press('Backspace');
     }, 100000);
   });
 
@@ -86,6 +87,9 @@ describe('Node modal', () => {
 
       await expect(modal).toClick('span', { text: '-' });
       expect(await repeatablesLength(modal)).toBe(1);
+
+      await page.keyboard.press('Escape');
+      await page.keyboard.press('Backspace');
     }, 100000);
 
     test('Repeatables are being respected', async () => {
@@ -123,21 +127,21 @@ describe('Node modal', () => {
       expect(await repeatablesLength(modal)).toBe(2);
       await page.keyboard.press('Enter');
 
-      // await addNode('Inspect', page);
-      // await expect(page).toClick('span#run');
-      // await page.waitForSelector('.Toastify__toast-body', {
-      //   visible: true,
-      // });
-      // await sleep(100);
-      // await expect(page).toMatch('Successfully ran story!');
+      await addNode('Inspect', page);
+      await expect(page).toClick('span#run');
+      await page.waitForSelector('.Toastify__toast-body', {
+        visible: true,
+      });
+      await sleep(100);
+      await expect(page).toMatch('Successfully ran story!');
 
-      // await expect(page).toClick('div#inspector-icon');
-      // await sleep(500);
-      // await expect(page).toMatch('random1');
-      // await expect(page).toMatch('random2');
-      // await expect(page).toMatch(randomValue1);
-      // await expect(page).toMatch(randomValue2);
-    }, 100000);
+      await expect(page).toClick('div#inspector-icon');
+      await sleep(500);
+      await expect(page).toMatch('random1');
+      await expect(page).toMatch('random2');
+      await expect(page).toMatch(randomValue1);
+      await expect(page).toMatch(randomValue2);
+    }, 200000);
   });
 
   afterAll(() => browser.close());
