@@ -30,6 +30,8 @@ describe('Node modal', () => {
   }, 200000);
 
   describe('Fields | Persisting', () => {
+    let nodeName;
+
     beforeAll(async () => {
       const possibleNodesNames = [
         'CreateJSON',
@@ -38,34 +40,30 @@ describe('Node modal', () => {
       ];
 
       const node = sample(possibleNodesNames);
+      nodeName = node;
       await addNode(node, page);
 
       await page.keyboard.press('Enter');
       await page.waitForSelector('#node-modal', {
         visible: true,
       });
-
-      await page.waitForSelector(`input[value="${node}"]`, {
-        visible: true,
-      });
-      await page.focus(`input[value="${node}"]`);
     }, 50000);
 
     test('Fields is being automatically persisted', async () => {
+      await page.waitForSelector(
+        `input[value="${nodeName}"]`,
+        {
+          visible: true,
+        },
+      );
+      await page.focus(`input[value="${nodeName}"]`);
+
       const newName = generateRandomString();
       await page.keyboard.type(newName);
       await page.keyboard.press('Escape');
 
       await expect(page).toMatch(newName);
     }, 100000);
-
-    test('Fields is being persisted by Enter submission', async () => {
-      const newName = generateRandomString();
-      await page.keyboard.type(newName);
-      await page.keyboard.press('Enter');
-
-      await expect(page).toMatch(newName);
-    }, 200000);
   });
 
   // describe('Fields | Repeatables', () => {});
