@@ -11,6 +11,9 @@ export const puppeteerConfig = {
     '--disable-gpu',
     '--disable-dev-shm-usage',
     '--disable-web-security',
+    '--no-first-run',
+    '--no-zygote',
+    '--single-process',
   ],
 };
 
