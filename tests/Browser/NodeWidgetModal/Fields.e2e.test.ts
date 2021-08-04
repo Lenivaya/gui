@@ -100,22 +100,22 @@ describe('Fields', () => {
       const randomValue1 = generateRandomString();
       const randomValue2 = generateRandomString();
 
-      await expect(modal).toFill(
+      await expect(page).toFill(
         'input[value="Attribute"]',
         'random1',
       );
-      await expect(modal).toFill(
+      await expect(page).toFill(
         'input[value="Value"]',
         randomValue1,
       );
 
-      await expect(modal).toClick('span', { text: '+' });
+      await expect(page).toClick('span', { text: '+' });
 
-      await expect(modal).toFill(
+      await expect(page).toFill(
         'input[value="Attribute"]',
         'random2',
       );
-      await expect(modal).toFill(
+      await expect(page).toFill(
         'input[value="Value"]',
         randomValue2,
       );
