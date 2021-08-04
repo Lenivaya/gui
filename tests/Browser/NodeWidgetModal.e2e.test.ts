@@ -56,9 +56,6 @@ describe('Node modal', () => {
       await page.keyboard.type(newName);
       await page.keyboard.press('Escape');
 
-      await page.waitForSelector('div.node', {
-        visible: true,
-      });
       await expect(page).toMatch(newName);
     }, 100000);
 
@@ -67,11 +64,8 @@ describe('Node modal', () => {
       await page.keyboard.type(newName);
       await page.keyboard.press('Enter');
 
-      await page.waitForSelector('div.node', {
-        visible: true,
-      });
       await expect(page).toMatch(newName);
-    }, 100000);
+    }, 200000);
   });
 
   // describe('Fields | Repeatables', () => {});
