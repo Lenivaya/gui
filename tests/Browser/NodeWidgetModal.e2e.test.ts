@@ -64,7 +64,7 @@ describe('Node modal', () => {
     const repeatableRowSelector =
       '.flex.flex-row.space-x-1';
 
-    test('Repeatables can be added and removed', () => {
+    test('Repeatables can be added and removed', async () => {
       const node = 'CreateAttribute';
       await addNode(node, page);
 
@@ -88,8 +88,8 @@ describe('Node modal', () => {
       await expect(modal).toClick('span', { text: '-' });
       repeatables = await page.$$(repeatableRowSelector);
       expect(repeatables.length).toBe(1);
-    });
-  }, 100000);
+    }, 100000);
+  });
 
   afterAll(() => browser.close());
 });
