@@ -22,6 +22,15 @@ describe('Hotkeys', () => {
     await sleep(5000);
   }, 200000);
 
+  test('[BACKSPACE] deletes the node', async () => {
+    const node = 'HTTPRequest';
+    await addNode(node, page);
+    await expect(page).toMatch(node);
+
+    await page.keyboard.press('Backspace');
+    await expect(page).not.toMatch(node);
+  }, 100000);
+
   test('[ENTER] selects node from search', async () => {
     const node = 'CreateJSON';
     await addNode(node, page);
@@ -40,15 +49,6 @@ describe('Hotkeys', () => {
       visible: true,
     });
     await expect(page).toMatch('node_name');
-  }, 100000);
-
-  test('[BACKSPACE] deletes the node', async () => {
-    const node = 'CreateJSON';
-    await addNode(node, page);
-    await expect(page).toMatch(node);
-
-    await page.keyboard.press('Backspace');
-    await expect(page).not.toMatch(node);
   }, 100000);
 
   test('[SHIFT + T] opens inspector', async () => {
