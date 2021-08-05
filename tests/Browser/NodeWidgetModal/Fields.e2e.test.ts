@@ -85,7 +85,7 @@ describe('Fields', () => {
         'input[value="Value"]',
         randomValue2,
       );
-      await page.keyboard.press('Escape');
+      await page.keyboard.press('Enter');
 
       await sleep(500);
       await expect(page).toClick('span', { text: node });
