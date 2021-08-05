@@ -29,6 +29,28 @@ describe('Hotkeys', () => {
     await expect(page).toMatch(node);
   }, 50000);
 
+  test('[ENTER] opens node modal', async () => {
+    const node = 'CreateJSON';
+    await addNode(node, page);
+    await expect(page).toMatch(node);
+
+    await sleep(1000);
+    await page.keyboard.press('Enter');
+    await page.waitForSelector('div#node-modal', {
+      visible: true,
+    });
+    await expect(page).toMatch('node_name');
+  }, 100000);
+
+  test('[BACKSPACE] deletes the node', async () => {
+    const node = 'CreateJSON';
+    await addNode(node, page);
+    await expect(page).toMatch(node);
+
+    await page.keyboard.press('Backspace');
+    await expect(page).not.toMatch(node);
+  }, 100000);
+
   test('[SHIFT + T] opens inspector', async () => {
     await page.keyboard.down('Shift');
     await page.keyboard.press('KeyT');
@@ -78,19 +100,6 @@ describe('Hotkeys', () => {
     await page.keyboard.up('Shift');
     await expect(page).not.toMatch('No data to show here');
   }, 200000);
-
-  test('[ENTER] opens node modal', async () => {
-    const node = 'CreateJSON';
-    await addNode(node, page);
-    await expect(page).toMatch(node);
-
-    await sleep(1000);
-    await page.keyboard.press('Enter');
-    await page.waitForSelector('div#node-modal', {
-      visible: true,
-    });
-    await expect(page).toMatch('node_name');
-  }, 100000);
 
   afterAll(() => browser.close());
 });
