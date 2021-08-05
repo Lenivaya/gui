@@ -24,7 +24,7 @@ describe('Fields', () => {
   let page;
 
   describe('Persisting', () => {
-    beforeAll(async () => {
+    beforeEach(async () => {
       browser = await puppeteer.launch(puppeteerConfig);
       page = await browser.newPage();
       await pageSetup(page);
@@ -92,7 +92,7 @@ describe('Fields', () => {
       await expect(page).toMatch('random2');
       await expect(page).toMatch(randomValue1);
       await expect(page).toMatch(randomValue2);
-    }, 200000);
+    }, 150000);
 
     afterAll(() => browser.close());
   });
