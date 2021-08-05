@@ -94,7 +94,7 @@ describe('Fields', () => {
       await expect(page).toMatch(randomValue2);
     }, 150000);
 
-    afterAll(() => browser.close());
+    afterEach(() => browser.close());
   });
 
   describe('Repeatables', () => {
