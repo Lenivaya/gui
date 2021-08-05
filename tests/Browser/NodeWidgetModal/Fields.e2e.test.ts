@@ -53,7 +53,7 @@ describe('Fields', () => {
       await expect(page).toMatch(newName);
     }, 100000);
 
-    test('Repeatable fields are being automatically persisted', async () => {
+    test('Repeatable fields are being persisted', async () => {
       await addNode('CreateAttribute', page);
 
       await page.keyboard.press('Enter');
@@ -84,7 +84,7 @@ describe('Fields', () => {
         'input[value="Value"]',
         randomValue2,
       );
-      await page.keyboard.press('Escape');
+      await page.keyboard.press('Enter');
 
       await sleep(500);
       await page.keyboard.press('Enter');
