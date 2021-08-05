@@ -13,15 +13,25 @@ import { sample } from 'lodash';
 setDefaultOptions({ timeout: 0 });
 
 describe('Fields', () => {
-  describe('Persisting', () => {
-    let browser;
-    let page;
+  let browser;
+  let page;
 
+  describe('Persisting', () => {
     beforeAll(async () => {
       browser = await puppeteer.launch(puppeteerConfig);
       page = await browser.newPage();
       await pageSetup(page);
     }, 50000);
+
+    const repeatableRowSelector =
+      '.flex.flex-row.space-x-1';
+
+    const repeatablesLength = async (el) => {
+      const repeatables = await el.$$(
+        repeatableRowSelector,
+      );
+      return repeatables.length;
+    };
 
     test('Fields are being automatically persisted', async () => {
       const possibleNodesNames = [
@@ -99,16 +109,6 @@ describe('Fields', () => {
       page = await browser.newPage();
       await pageSetup(page);
     }, 50000);
-
-    const repeatableRowSelector =
-      '.flex.flex-row.space-x-1';
-
-    const repeatablesLength = async (el) => {
-      const repeatables = await el.$$(
-        repeatableRowSelector,
-      );
-      return repeatables.length;
-    };
 
     test('Repeatables can be added and removed', async () => {
       const node = 'CreateAttribute';
