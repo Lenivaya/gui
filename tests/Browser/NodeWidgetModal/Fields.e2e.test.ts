@@ -12,6 +12,13 @@ import { sample } from 'lodash';
 
 setDefaultOptions({ timeout: 0 });
 
+const repeatableRowSelector = '.flex.flex-row.space-x-1';
+
+const repeatablesLength = async (el) => {
+  const repeatables = await el.$$(repeatableRowSelector);
+  return repeatables.length;
+};
+
 describe('Fields', () => {
   let browser;
   let page;
@@ -22,16 +29,6 @@ describe('Fields', () => {
       page = await browser.newPage();
       await pageSetup(page);
     }, 50000);
-
-    const repeatableRowSelector =
-      '.flex.flex-row.space-x-1';
-
-    const repeatablesLength = async (el) => {
-      const repeatables = await el.$$(
-        repeatableRowSelector,
-      );
-      return repeatables.length;
-    };
 
     test('Fields are being automatically persisted', async () => {
       const possibleNodesNames = [
