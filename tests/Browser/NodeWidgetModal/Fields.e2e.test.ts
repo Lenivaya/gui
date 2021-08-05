@@ -54,7 +54,8 @@ describe('Fields', () => {
     }, 100000);
 
     test('Repeatable fields are being persisted', async () => {
-      await addNode('CreateAttribute', page);
+      const node = 'CreateAttribute';
+      await addNode(node, page);
 
       await page.keyboard.press('Enter');
       const modal = await expect(page).toMatchElement(
@@ -84,10 +85,13 @@ describe('Fields', () => {
         'input[value="Value"]',
         randomValue2,
       );
-      await page.keyboard.press('Enter');
+      await page.keyboard.press('Escape');
 
       await sleep(500);
-      await page.keyboard.press('Enter');
+      await expect(page).toClick('span', { text: node });
+      await page.waitForSelector('#node-modal', {
+        visible: true,
+      });
       await expect(page).toMatch('random1');
       await expect(page).toMatch('random2');
       await expect(page).toMatch(randomValue1);
