@@ -14,7 +14,6 @@ setDefaultOptions({ timeout: 0 });
 
 describe('Fields', () => {
   describe('Persisting', () => {
-    let nodeName;
     let browser;
     let page;
 
@@ -24,7 +23,7 @@ describe('Fields', () => {
       await pageSetup(page);
     }, 50000);
 
-    test('Fields is being automatically persisted', async () => {
+    test('Fields are being automatically persisted', async () => {
       const possibleNodesNames = [
         'CreateJSON',
         'HTTPRequest',
@@ -32,7 +31,6 @@ describe('Fields', () => {
       ];
 
       const node = sample(possibleNodesNames);
-      nodeName = node;
       await addNode(node, page);
 
       await page.keyboard.press('Enter');
@@ -40,13 +38,54 @@ describe('Fields', () => {
         visible: true,
       });
 
-      await page.focus(`input[value="${nodeName}"]`);
+      await page.focus(`input[value="${node}"]`);
       const newName = generateRandomString();
       await page.keyboard.type(newName);
       await page.keyboard.press('Escape');
 
       await expect(page).toMatch(newName);
     }, 100000);
+
+    test('Repeatable fields are being automatically persisted', async () => {
+      const node = 'CreateAttribute';
+      await addNode(node, page);
+
+      await page.keyboard.press('Enter');
+      const modal = await expect(page).toMatchElement(
+        '#node-modal',
+      );
+
+      await expect(modal).toClick('span', { text: '+' });
+      expect(await repeatablesLength(modal)).toBe(2);
+
+      const randomValue1 = generateRandomString();
+      const randomValue2 = generateRandomString();
+
+      await expect(page).toFill(
+        'input[value="Attribute"]',
+        'random1',
+      );
+      await expect(page).toFill(
+        'input[value="Value"]',
+        randomValue1,
+      );
+
+      await expect(page).toFill(
+        'input[value="Attribute"]',
+        'random2',
+      );
+      await expect(page).toFill(
+        'input[value="Value"]',
+        randomValue2,
+      );
+      await page.keyboard.press('Escape');
+
+      await page.keyboard.press('Enter');
+      await expect(page).toMatch('random1');
+      await expect(page).toMatch('random2');
+      await expect(page).toMatch(randomValue1);
+      await expect(page).toMatch(randomValue2);
+    }, 150000);
 
     afterAll(() => browser.close());
   });
