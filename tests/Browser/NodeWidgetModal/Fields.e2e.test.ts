@@ -87,16 +87,14 @@ describe('Fields', () => {
       );
       await page.keyboard.press('Enter');
 
-      await sleep(500);
-      await expect(page).toClick('span', { text: node });
-      await page.waitForSelector('#node-modal', {
-        visible: true,
-      });
+      await sleep(1000);
+      await page.keyboard.press('Enter');
+      await expect(page).toMatchElement('#node-modal');
       await expect(page).toMatch('random1');
       await expect(page).toMatch('random2');
       await expect(page).toMatch(randomValue1);
       await expect(page).toMatch(randomValue2);
-    }, 150000);
+    }, 100000);
 
     afterEach(() => browser.close());
   });
