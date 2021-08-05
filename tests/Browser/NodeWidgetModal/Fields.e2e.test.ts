@@ -24,7 +24,7 @@ describe('Fields', () => {
   let page;
 
   describe('Persisting', () => {
-    beforeEach(async () => {
+    beforeAll(async () => {
       browser = await puppeteer.launch(puppeteerConfig);
       page = await browser.newPage();
       await pageSetup(page);
@@ -53,50 +53,7 @@ describe('Fields', () => {
       await expect(page).toMatch(newName);
     }, 100000);
 
-    test('Repeatable fields are being persisted', async () => {
-      const node = 'CreateAttribute';
-      await addNode(node, page);
-
-      await page.keyboard.press('Enter');
-      const modal = await expect(page).toMatchElement(
-        '#node-modal',
-      );
-
-      await expect(modal).toClick('span', { text: '+' });
-      expect(await repeatablesLength(modal)).toBe(2);
-
-      const randomValue1 = generateRandomString();
-      const randomValue2 = generateRandomString();
-
-      await expect(page).toFill(
-        'input[value="Attribute"]',
-        'random1',
-      );
-      await expect(page).toFill(
-        'input[value="Value"]',
-        randomValue1,
-      );
-
-      await expect(page).toFill(
-        'input[value="Attribute"]',
-        'random2',
-      );
-      await expect(page).toFill(
-        'input[value="Value"]',
-        randomValue2,
-      );
-      await page.keyboard.press('Enter');
-
-      await sleep(1000);
-      await page.keyboard.press('Enter');
-      await expect(page).toMatchElement('#node-modal');
-      await expect(page).toMatch('random1');
-      await expect(page).toMatch('random2');
-      await expect(page).toMatch(randomValue1);
-      await expect(page).toMatch(randomValue2);
-    }, 100000);
-
-    afterEach(() => browser.close());
+    afterAll(() => browser.close());
   });
 
   describe('Repeatables', () => {
