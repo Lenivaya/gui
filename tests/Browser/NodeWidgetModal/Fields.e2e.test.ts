@@ -54,8 +54,7 @@ describe('Fields', () => {
     }, 100000);
 
     test('Repeatable fields are being automatically persisted', async () => {
-      const node = 'CreateAttribute';
-      await addNode(node, page);
+      await addNode('CreateAttribute', page);
 
       await page.keyboard.press('Enter');
       const modal = await expect(page).toMatchElement(
@@ -87,20 +86,18 @@ describe('Fields', () => {
       );
       await page.keyboard.press('Escape');
 
+      await sleep(500);
       await page.keyboard.press('Enter');
       await expect(page).toMatch('random1');
       await expect(page).toMatch('random2');
       await expect(page).toMatch(randomValue1);
       await expect(page).toMatch(randomValue2);
-    }, 150000);
+    }, 200000);
 
     afterAll(() => browser.close());
   });
 
   describe('Repeatables', () => {
-    let browser;
-    let page;
-
     beforeEach(async () => {
       browser = await puppeteer.launch(puppeteerConfig);
       page = await browser.newPage();
