@@ -1604,9 +1604,9 @@
   integrity sha512-Jz+Jgjhrzv21MrsJbUV2sewRrCsKv51NuQFje1QWQbn2E4L1G58pxb6+H9N6EdELlvZvwBffvTYS4OWrF4r71A==
 
 "@fontsource/ibm-plex-serif@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/ibm-plex-serif/-/ibm-plex-serif-4.5.0.tgz#4f61df956b4174ae9c7d73a9a2d5d48722f678ca"
-  integrity sha512-idUkOp4YgOd+CZOdhNPeFarVl0Ks4AvF78dqLK86bIHBI4kX6OJXuxnMH9jcUXny+mNyAQPZGUihIaor+5JXYg==
+  version "4.5.10"
+  resolved "https://registry.yarnpkg.com/@fontsource/ibm-plex-serif/-/ibm-plex-serif-4.5.10.tgz#bb828cfe9757540d71b32496b581e1e2e014217c"
+  integrity sha512-Jxv7ewRAU331n2WRTQYoNiryxwFHTfu+9OFQdzIwjsiN3/mCXDx22Q5KmilyPRKwgzQI/czn8kwsp567zaQuNQ==
 
 "@fortawesome/fontawesome-free@^5.15.4":
   version "5.15.4"
